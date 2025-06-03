@@ -42,10 +42,8 @@ DramaTune is a web application that helps you find and merge the perfect music t
 
 ### Frontend
 
-1. Go to the frontend directory and install dependencies:
 
     ```
-    cd frontend
     npm install
     npm start
     ```
