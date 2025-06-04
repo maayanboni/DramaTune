@@ -50,9 +50,9 @@ def process_all_videos(video_folder, output_data):
             rhythm = estimate_rhythm(path)
             output_data.append({"video": filename, "rhythm_score": rhythm})
 
-
-# Save to CSV
-df = pd.DataFrame(output_data)
-print("Saving to CSV...")
-df.to_csv("video_rhythm_results.csv", index=False)
-print("Saved successfully.")
+if __name__ == "__main__":
+    process_all_videos(video_folder, output_data)
+    df = pd.DataFrame(output_data)
+    print("Saving to CSV...")
+    df.to_csv("video_rhythm_results.csv", index=False)
+    print("Saved successfully.")

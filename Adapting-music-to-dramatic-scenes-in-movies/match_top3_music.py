@@ -1,5 +1,5 @@
 """
-Step 2 - normalize our results both in videos and music
+Step 2 - for each video find the 3 music tracks whose tempo is closest to the video’s rhythm
 """
 
 import pandas as pd
