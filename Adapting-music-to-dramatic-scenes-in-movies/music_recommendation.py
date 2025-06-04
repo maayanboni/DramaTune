@@ -23,10 +23,9 @@ def get_top3_music_for_video(video_path, estimate_rhythm):
 
     normalized_rhythm = (rhythm_score - min_rhythm) / (max_rhythm - min_rhythm)
 
-    # For safety, keep it in [0,1]
     normalized_rhythm = max(0, min(1, normalized_rhythm))
 
-    # Prepare feature vectors for all tracks (include loudness!)
+    # Prepare feature vectors for all tracks
     input_features = [
         [normalized_rhythm, row['normalized_tempo'], row['normalized_loudness']]
         for _, row in music_data.iterrows()
@@ -45,7 +44,3 @@ def get_top3_music_for_video(video_path, estimate_rhythm):
     print("Top 3 music files:", top3_music_files)
     return top3_music_files
 
-# (Optional) If you want to set min/max rhythm from a file at load time:
-#video_data = pd.read_csv('video_rhythm_results.csv')
-#min_rhythm = video_data['rhythm_score'].min()
-#max_rhythm = video_data['rhythm_score'].max()

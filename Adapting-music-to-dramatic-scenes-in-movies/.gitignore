@@ -5,10 +5,9 @@ ignoring files.
 /node_modules
 /.pnp
 .pnp.js
-*.pkl
 # testing
 /coverage
-.DS_Store
+*.pkl
 
 # production
 /build

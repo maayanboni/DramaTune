@@ -10,10 +10,6 @@ import joblib
 
 # Load rhythm values for videos and music
 video_data = pd.read_csv('normalized_video_rhythm.csv')
-
-#music_data = pd.read_csv('normalized_music_tempo.csv')
-
-#!!!!!new!!!!!
 music_data = pd.read_csv('normalized_music_tempo_loudness.csv')
 
 
@@ -25,16 +21,10 @@ for _, video in video_data.iterrows():
     for _, music in music_data.iterrows():
         video_rhythm = video['normalized_rhythm']
         music_tempo = music['normalized_tempo']
-
-        #features = [video_rhythm, music_tempo]
-        #match_score = 1 - abs(video_rhythm - music_tempo)  # Higher is better
-
-        #!!!!new!!!!!
         music_loudness = music['normalized_loudness']
         features = [video_rhythm, music_tempo, music_loudness]
-        # Optionally, update match_score, or keep as is for now:
-        match_score = 1 - abs(video_rhythm - music_tempo)
 
+        match_score = 1 - abs(video_rhythm - music_tempo)
 
         pairs.append(features)
         targets.append(match_score)
@@ -64,15 +54,10 @@ for _, video in video_data.iterrows():
     video_id = video['video']
 
     # Create prediction inputs
-
-    # input_pairs = [[video_rhythm, tempo] for tempo in music_data['normalized_tempo']]
-
-    #!!!!!new!!!!!
     input_pairs = [
         [video_rhythm, row['normalized_tempo'], row['normalized_loudness']]
         for _, row in music_data.iterrows()
     ]
-
 
     predictions = model.predict(input_pairs)
 

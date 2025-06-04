@@ -30,7 +30,6 @@ merged = pd.merge(tempo_df, loudness_df, on='music')
 merged.to_csv('music_tempo_loudness.csv', index=False)
 print("Merged CSV with tempo and loudness saved as music_tempo_loudness.csv")
 
-# -----Normalize the loudness column
 music_df = pd.read_csv('music_tempo_loudness.csv')
 
 music_df['tempo'] = music_df['tempo'].apply(lambda x: float(x.strip('[]')))

@@ -23,7 +23,7 @@ music_df['tempo'] = music_df['tempo'].apply(lambda x: float(x.strip('[]')))
 music_scaler = MinMaxScaler()
 music_df['normalized_tempo'] = music_scaler.fit_transform(music_df[['tempo']])
 
-# Save normalized files (optional, for inspection)
+# Save normalized files
 video_df.to_csv('normalized_video_rhythm.csv', index=False)
 music_df.to_csv('normalized_music_tempo.csv', index=False)
 
