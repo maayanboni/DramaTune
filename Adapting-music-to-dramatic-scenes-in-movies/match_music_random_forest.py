@@ -55,10 +55,17 @@ mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
-print("\n🔍 Model Evaluation:")
+print("\nModel Evaluation:")
 print(f"Mean Absolute Error (MAE): {mae:.3f}")
 print(f"Mean Squared Error (MSE): {mse:.3f}")
 print(f"R² Score: {r2:.3f}")
+
+#results:
+#Model Evaluation:
+#Mean Absolute Error (MAE): 0.092
+#Mean Squared Error (MSE): 0.013
+#R² Score: 0.568
+
 
 #end accuracy
 
