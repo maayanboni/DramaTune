@@ -24,7 +24,10 @@ for _, video in video_data.iterrows():
         music_loudness = music['normalized_loudness']
         features = [video_rhythm, music_tempo, music_loudness]
 
-        match_score = 1 - abs(video_rhythm - music_tempo)
+        # Keep the match score without loudness
+        # The features include loudness so the model can discover patterns
+        match_score = 1 - abs(video_rhythm - music_tempo) + np.random.normal(0, 0.1)    #noise new
+
 
         pairs.append(features)
         targets.append(match_score)
@@ -41,7 +44,23 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model = RandomForestRegressor(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-print("✅ Model trained successfully!")
+print("Model trained successfully!")
+
+#accuracy
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+y_pred = model.predict(X_test)
+
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("\n🔍 Model Evaluation:")
+print(f"Mean Absolute Error (MAE): {mae:.3f}")
+print(f"Mean Squared Error (MSE): {mse:.3f}")
+print(f"R² Score: {r2:.3f}")
+
+#end accuracy
 
 # ----------------------------
 # Step 3: Predict top 3 matches for each video
@@ -78,7 +97,7 @@ output_df = pd.DataFrame([
     for vid, musics in top_3_matches.items()
 ])
 output_df.to_csv('top_3_matches.csv', index=False)
-print("\n📁 Results saved to top_3_matches.csv")
+print("\nResults saved to top_3_matches.csv")
 
 #save the model for UI
 joblib.dump(model, 'random_forest_model.pkl')

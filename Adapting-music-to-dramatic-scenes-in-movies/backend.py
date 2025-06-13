@@ -32,6 +32,7 @@ def merge_and_download():
     # Merge video + audio (audio looped to match video duration)
     video_clip = mpe.VideoFileClip(video_path)
     audio_clip = mpe.AudioFileClip(music_path)
+
     loops = int(video_clip.duration // audio_clip.duration) + 1
     full_audio = mpe.concatenate_audioclips([audio_clip] * loops)
     full_audio = full_audio.subclip(0, video_clip.duration)
